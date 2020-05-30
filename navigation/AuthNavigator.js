@@ -1,15 +1,21 @@
 import React from 'react';
-import Login from '../screens/Login.js'
-import SignupScreen from '../screens/Signup.js'
+import Login from '../screens/Login'
+import SignupScreen from '../screens/Signup'
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 
 const StackNavigator = createStackNavigator(
   {
     Login: { 
-      screen: Login
+      screen: Login,
+      navigationOptions: {
+      	header: null
+      }
     },
     Signup: { 
-      screen: SignupScreen
+      screen: SignupScreen,
+      navigationOptions: {
+      	title: 'Signup'
+      }
     }
   }
 );

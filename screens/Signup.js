@@ -1,32 +1,55 @@
 import React from 'react';
-import { Text, View, TextInput } from 'react-native';
+import { Text, View, TextInput, TouchableOpacity } from 'react-native';
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { updateEmail, updatePassword } from '../actions/user.js'
-import styles from '../styles.js'
+import { updateEmail, updatePassword, updateUsername, updateBio, signup } from '../actions/user'
+import styles from '../styles'
 
 class Signup extends React.Component {
+
+  signup = () => {
+    this.props.signup()
+    this.props.navigation.navigate('Home')
+  }
+
   render() {
     return (
       <View style={styles.container}>
-        <Text> Signup </Text>
         <TextInput
+        	style={styles.border}
         	value={this.props.user.email}
         	onChangeText={input => this.props.updateEmail(input)}
         	placeholder='Email'
         />
         <TextInput
+        	style={styles.border}
         	value={this.props.user.password}
         	onChangeText={input => this.props.updatePassword(input)}
         	placeholder='Password'
+        	secureTextEntry={true}
         />
+        <TextInput
+        	style={styles.border}
+        	value={this.props.user.username}
+        	onChangeText={input => this.props.updateUsername(input)}
+        	placeholder='Username'
+        />
+        <TextInput
+        	style={styles.border}
+        	value={this.props.user.bio}
+        	onChangeText={input => this.props.updateBio(input)}
+        	placeholder='Bio'
+        />
+      	<TouchableOpacity style={styles.button} onPress={() => this.signup()}>
+      		<Text>Signup</Text>
+      	</TouchableOpacity>
       </View>
     );
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ updateEmail, updatePassword }, dispatch)
+  return bindActionCreators({ updateEmail, updatePassword, updateUsername, updateBio, signup }, dispatch)
 }
 
 const mapStateToProps = (state) => {
