@@ -6,9 +6,9 @@ import { Provider } from 'react-redux'
 import thunkMiddleware from 'redux-thunk';
 import logger from 'redux-logger';
 import firebase from './config/firebase'
-const middleware = applyMiddleware(thunkMiddleware)
+const middleware = applyMiddleware(thunkMiddleware, logger)
 const store = createStore(reducer, middleware);
-// console.disableYellowBox = true;
+console.disableYellowBox = true;
 
 export default class App extends React.Component {
   render() {

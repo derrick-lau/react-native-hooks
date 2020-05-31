@@ -1,17 +1,13 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import Home from '../screens/Home'
-import Search from '../screens/Search'
-import Upload from '../screens/Upload'
-import Activity from '../screens/Activity'
-import Profile from '../screens/Profile'
+import { HomeNavigator, SearchNavigator, PostNavigator, ActivityNavigator, ProfileNavigator } from './StackNavigator'
 import { createBottomTabNavigator, createAppContainer } from 'react-navigation';
 
 const TabNavigator = createBottomTabNavigator(
   {
     Home: { 
-      screen: Home,
+      screen: HomeNavigator,
       navigationOptions: {
         tabBarLabel: ' ',
         tabBarIcon: () => (
@@ -20,7 +16,7 @@ const TabNavigator = createBottomTabNavigator(
       }
     },
     Search: { 
-      screen: Search,
+      screen: SearchNavigator,
       navigationOptions: {
         tabBarLabel: ' ',
         tabBarIcon: () => (
@@ -28,8 +24,8 @@ const TabNavigator = createBottomTabNavigator(
         ) 
       }
     },
-    Upload: { 
-      screen: Upload,
+    Post: { 
+      screen: PostNavigator,
       navigationOptions: {
         tabBarLabel: ' ',
         tabBarIcon: () => (
@@ -38,7 +34,7 @@ const TabNavigator = createBottomTabNavigator(
       }
     },
     Activity: { 
-      screen: Activity,
+      screen: ActivityNavigator,
       navigationOptions: {
         tabBarLabel: ' ',
         tabBarIcon: ({focused}) => (
@@ -47,7 +43,7 @@ const TabNavigator = createBottomTabNavigator(
       }
     },
     Profile: { 
-      screen: Profile,
+      screen: ProfileNavigator,
       navigationOptions: {
         tabBarLabel: ' ',
         tabBarIcon: () => (
