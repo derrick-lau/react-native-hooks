@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, View, TextInput, TouchableOpacity } from 'react-native';
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { updateEmail, updatePassword, updateUsername, updateBio, signup } from '../actions/user'
+import { updateEmail, updatePassword, updateUsername, updateBio, signup } from '../redux/actions/user'
 import styles from '../styles'
 
 class Signup extends React.Component {

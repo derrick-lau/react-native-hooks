@@ -1,7 +1,7 @@
 import React from 'react';
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { updateDescription, uploadPost } from '../actions/post'
+import { updateDescription, uploadPost } from '../redux/actions/post'
 import { Text, View, TextInput, Image, TouchableOpacity } from 'react-native';
 import styles from '../styles'
 

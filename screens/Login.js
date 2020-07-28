@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, View, TextInput, TouchableOpacity } from 'react-native';
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { updateEmail, updatePassword, login, getUser, facebookLogin} from '../actions/user'
+import { updateEmail, updatePassword, login, getUser, facebookLogin} from '../redux/actions/user'
 import firebase from 'firebase'
 import styles from '../styles'
 

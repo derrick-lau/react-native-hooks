@@ -1,5 +1,5 @@
 import firebase from 'firebase';
-import db from '../config/firebase';
+import db from '../../config/firebase';
 
 export const updateEmail = (email) => {
 	return {type: 'UPDATE_EMAIL', payload: email}
