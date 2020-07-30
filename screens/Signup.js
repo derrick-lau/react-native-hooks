@@ -2,16 +2,10 @@ import React from 'react';
 import { Text, View, TextInput, TouchableOpacity } from 'react-native';
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { updateEmail, updatePassword, updateUsername, updateBio, signup } from '../redux/actions/user'
+import { updateEmail, updatePassword, updateUsername, updateBio } from '../actions/user'
 import styles from '../styles'
 
 class Signup extends React.Component {
-
-  signup = () => {
-    this.props.signup()
-    this.props.navigation.navigate('Home')
-  }
-
   render() {
     return (
       <View style={styles.container}>
@@ -40,7 +34,7 @@ class Signup extends React.Component {
         	onChangeText={input => this.props.updateBio(input)}
         	placeholder='Bio'
         />
-      	<TouchableOpacity style={styles.button} onPress={() => this.signup()}>
+      	<TouchableOpacity style={styles.button} onPress={() => console.log(this.props.user)}>
       		<Text>Signup</Text>
       	</TouchableOpacity>
       </View>
@@ -49,7 +43,7 @@ class Signup extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ updateEmail, updatePassword, updateUsername, updateBio, signup }, dispatch)
+  return bindActionCreators({ updateEmail, updatePassword, updateUsername, updateBio }, dispatch)
 }
 
 const mapStateToProps = (state) => {
