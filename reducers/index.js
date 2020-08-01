@@ -1,18 +1,9 @@
 import { combineReducers } from 'redux'
 
-const counter = (state = 115, action) => {
-  switch (action.type) {
-    case 'ADD':
-      return state + 1
-    case 'SUBTRACT':
-      return state - 1
-    default:
-      return state
-  }
-}
-
 const user = (state = {}, action) => {
   switch (action.type) {
+    case 'LOGIN':
+      return action.payload
     case 'UPDATE_EMAIL':
       return {...state, email: action.payload}
     case 'UPDATE_PASSWORD':
@@ -26,9 +17,20 @@ const user = (state = {}, action) => {
   }
 }
 
+const post = (state=null, action) => {
+  switch (action.type) {
+    case 'UPDATE_DESCRIPTION':
+      return {...state, description: action.payload}
+    case 'GET_POSTS':
+      return {...state, feed: action.payload}
+    default:
+      return state
+  }
+}
+
 const rootReducer = combineReducers({
-	counter,
-	user
+	user,
+  post,
 })
 
 export default rootReducer

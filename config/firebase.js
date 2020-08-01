@@ -1,5 +1,6 @@
 import firebase from 'firebase';
 import ENV from '../env';
+require('firebase/firestore')
 
 const config = {
   apiKey: ENV.apiKey,
@@ -10,6 +11,13 @@ const config = {
   messagingSenderId: ENV.messagingSenderId
 }
 
-const initialize = firebase.initializeApp(config)
+firebase.initializeApp(config)
 
-export default initialize;
+const db = firebase.firestore()
+
+//Need to add this to forgo deprecated warnings
+db.settings({
+  timestampsInSnapshots: true
+});
+
+export default db;
