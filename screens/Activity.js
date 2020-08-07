@@ -6,7 +6,7 @@ export default class Activity extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text> Activity </Text>
+      <Text> Activity </Text>
       </View>
     );
   }
