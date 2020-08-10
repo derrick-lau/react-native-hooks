@@ -1,22 +1,28 @@
 import React from 'react';
-import { bindActionCreators } from 'redux'
+import styles from '../styles'
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import { updateDescription, uploadPost } from '../actions/post'
 import { Text, View, TextInput, Image, TouchableOpacity } from 'react-native';
-import styles from '../styles'
 
 class Post extends React.Component {
+
+  post = () => {
+    this.props.uploadPost()
+    this.props.navigation.navigate('Home')
+  }
+
   render() {
     return (
       <View style={styles.container}>
-      	<Image style={styles.postPhoto} source={{uri: 'https://firebasestorage.googleapis.com/v0/b/instagram-tutorial-1a335.appspot.com/o/philly.jpg?alt=media&token=bb2c4267-3952-43f9-8342-5d46fa1f86f9'}}/>
+      	<Image style={styles.postPhoto} source={{uri: this.props.post.photo }}/>
         <TextInput
         	style={styles.border}
         	value={this.props.post.description}
         	onChangeText={text => this.props.updateDescription(text)}
         	placeholder='Description'
         />
-      	<TouchableOpacity style={styles.button} onPress={this.props.uploadPost}>
+      	<TouchableOpacity style={styles.button} onPress={this.post}>
       		<Text>Post</Text>
       	</TouchableOpacity>
       </View>

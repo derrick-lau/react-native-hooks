@@ -1,10 +1,10 @@
-import React from 'react';
-import { Text, View, TextInput, TouchableOpacity } from 'react-native';
+import React from 'react'
+import styles from '../styles'
+import firebase from 'firebase'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import { Text, View, TextInput, TouchableOpacity } from 'react-native';
 import { updateEmail, updatePassword, login, getUser, facebookLogin} from '../actions/user'
-import firebase from 'firebase'
-import styles from '../styles'
 
 class Login extends React.Component {
 
