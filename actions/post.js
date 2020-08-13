@@ -10,6 +10,10 @@ export const updatePhoto = (input) => {
 	return {type: 'UPDATE_PHOTO', payload: input}
 }
 
+export const updateLocation = (input) => {
+	return {type: 'UPDATE_LOCATION', payload: input}
+}
+
 export const uploadPost = () => {
 	return async (dispatch, getState) => {
 		try {
@@ -19,6 +23,7 @@ export const uploadPost = () => {
 				id: id,
 				postPhoto: post.photo,
 				postDescription: post.description,
+				postLocation: post.location,
 				uid: user.uid,
 				photo: user.photo,
 				username: user.username,
