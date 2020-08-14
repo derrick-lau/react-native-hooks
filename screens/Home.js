@@ -1,6 +1,6 @@
 import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
-import { Text, View, Button, Image, FlatList } from 'react-native';
+import { Text, View, Button, Image, FlatList, TouchableOpacity } from 'react-native';
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { getPosts } from '../actions/post'
@@ -10,6 +10,13 @@ class Home extends React.Component {
 
   componentDidMount() {
     this.props.getPosts()
+  }
+
+  navigateMap = (item) => {
+    console.log(this.props.navigation)
+    this.props.navigation.navigate('Map', 
+      { location: item.postLocation }
+    )
   }
 
   render() {
@@ -24,7 +31,12 @@ class Home extends React.Component {
               <View style={[styles.row, styles.center]}>
                 <View style={[styles.row, styles.center]}>
                   <Image style={styles.roundImage} source={{uri: item.photo}}/>
-                  <Text>{item.username}</Text>
+                  <View>
+                    <Text>{item.username}</Text>
+                    <TouchableOpacity onPress={() => this.navigateMap(item)} >
+                      <Text>{item.postLocation ? item.postLocation.name : null}</Text>
+                    </TouchableOpacity>
+                  </View>
                 </View>
                 <Ionicons style={{margin: 5}} name='ios-flag' size={25} />
               </View>

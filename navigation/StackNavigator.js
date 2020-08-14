@@ -7,6 +7,7 @@ import PostScreen from '../screens/Post'
 import ActivityScreen from '../screens/Activity'
 import ProfileScreen from '../screens/Profile'
 import CameraScreen from '../screens/Camera'
+import MapScreen from '../screens/Map'
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 import { TouchableOpacity, Image } from 'react-native'
 
@@ -28,6 +29,17 @@ export const HomeNavigator = createAppContainer(createStackNavigator(
         ),
       })
     },
+    Map: {
+      screen: MapScreen,
+      navigationOptions: ({ navigation }) => ({
+        title: 'Map View',
+        headerLeft: (
+          <TouchableOpacity onPress={() => navigation.goBack()} >
+            <Ionicons style={styles.icon} name={'ios-arrow-back'} size={30}/>
+          </TouchableOpacity>
+        )
+      })
+    },
     Camera: { 
       screen: CameraScreen,
       navigationOptions: {
@@ -40,6 +52,9 @@ export const HomeNavigator = createAppContainer(createStackNavigator(
 HomeNavigator.navigationOptions = ({ navigation }) => {
   let tabBarVisible = true
   if (navigation.state.routes.some(route => route.routeName === 'Camera')) {
+    tabBarVisible = false
+  }
+  if (navigation.state.routes.some(route => route.routeName === 'Map')) {
     tabBarVisible = false
   }
   return {
