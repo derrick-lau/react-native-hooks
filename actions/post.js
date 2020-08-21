@@ -55,11 +55,28 @@ export const getPosts = () => {
 
 export const likePost = (post) => {
   return (dispatch, getState) => {
-    const { uid } = getState().user
+    const { uid, username, photo } = getState().user
     try {
+      // const home = cloneDeep(getState().post.feed)
+      // let newFeed = home.map(item => {
+      //   if(item.id === post.id){
+      //     item.likes.push(uid)
+      //   } return item
+      // })
       db.collection('posts').doc(post.id).update({
         likes: firebase.firestore.FieldValue.arrayUnion(uid)
       })
+      db.collection('activity').doc().set({
+        postId: post.id,
+        postPhoto: post.postPhoto,
+        likerId: uid,
+        likerPhoto: photo,
+        likerName: username,
+        uid: post.uid,
+        date: new Date().getTime(),
+        type: 'LIKE',
+      })
+      // dispatch({type: 'GET_POSTS', payload: newFeed})
       dispatch(getPosts())
     } catch(e) {
       console.error(e)
@@ -73,6 +90,10 @@ export const unlikePost = (post) => {
     try {
       db.collection('posts').doc(post.id).update({
         likes: firebase.firestore.FieldValue.arrayRemove(uid)
+      })
+      const query = await db.collection('activity').where('postId', '==', post.id).where('likerId', '==', uid).get()
+      query.forEach((response) => {
+        response.ref.delete()
       })
       dispatch(getPosts())
     } catch(e) {
