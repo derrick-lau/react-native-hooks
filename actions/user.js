@@ -17,6 +17,10 @@ export const updateBio = (bio) => {
 	return {type: 'UPDATE_BIO', payload: bio}
 }
 
+export const updatePhoto = (photo) => {
+	return {type: 'UPDATE_PHOTO', payload: photo}
+}
+
 export const login = () => {
 	return async (dispatch, getState) => {
 		try {
@@ -60,7 +64,6 @@ export const facebookLogin = () => {
 	}
 }
 
-
 export const getUser = (uid) => {
 	return async (dispatch, getState) => {
 		try {
@@ -70,6 +73,21 @@ export const getUser = (uid) => {
 			alert(e)
 		}
 	}
+}
+
+export const updateUser = () => {
+  return async ( dispatch, getState )  => {
+    const { uid, username, bio, photo } = getState().user
+    try {
+      db.collection('users').doc(uid).update({
+        username: username,
+        bio: bio,
+        photo: photo
+      })
+    } catch(e) {
+      alert(e)
+    }
+  }
 }
 
 export const signup = () => {

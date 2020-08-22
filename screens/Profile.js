@@ -1,6 +1,6 @@
 import React from 'react';
 import firebase from 'firebase';
-import { Text, View, Button, Image} from 'react-native';
+import { Text, View, Image, TouchableOpacity} from 'react-native';
 import { connect } from 'react-redux'
 import styles from '../styles'
 
@@ -8,15 +8,17 @@ class Profile extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text> Profile</Text>
-        <Image
-          style={{width: 50, height: 50}}
-          source={{uri: this.props.user.photo}}
-        />
+        <Text>Profile</Text>
+        <Image style={styles.roundImage} source={{uri: this.props.user.photo}}/>
         <Text>{this.props.user.email}</Text>
         <Text>{this.props.user.username}</Text>
         <Text>{this.props.user.bio}</Text>
-        <Button title='Logout' onPress={() => firebase.auth().signOut()}/>
+        <TouchableOpacity style={styles.buttonSmall} onPress={() => this.props.navigation.navigate('Edit')}>
+          <Text style={styles.bold}>Edit Profile</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.buttonSmall} onPress={() => firebase.auth().signOut()}>
+          <Text style={styles.bold}>Logout</Text>
+        </TouchableOpacity>
       </View>
     );
   }

@@ -8,6 +8,7 @@ import ActivityScreen from '../screens/Activity'
 import ProfileScreen from '../screens/Profile'
 import CameraScreen from '../screens/Camera'
 import MapScreen from '../screens/Map'
+import EditScreen from '../screens/Signup'
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 import { TouchableOpacity, Image } from 'react-native'
 
@@ -102,6 +103,17 @@ export const ProfileNavigator = createAppContainer(createStackNavigator(
       navigationOptions: {
         title: 'Profile'
       }
+    },
+    Edit: {
+      screen: EditScreen,
+      navigationOptions: ({ navigation }) => ({
+        title: 'Edit Profile',
+        headerLeft: (
+          <TouchableOpacity onPress={() => navigation.goBack()} >
+            <Ionicons style={styles.icon} name={'ios-arrow-back'} size={30}/>
+          </TouchableOpacity>
+        )
+      })
     }
   }
 ));

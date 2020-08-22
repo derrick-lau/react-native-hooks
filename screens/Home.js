@@ -61,7 +61,6 @@ class Home extends React.Component {
                 <Text>{item.postDescription}</Text>
               </View>
             )
-
           }}
         />
       </View>
