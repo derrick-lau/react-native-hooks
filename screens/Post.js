@@ -3,10 +3,12 @@ import styles from '../styles'
 import ENV from '../env';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { Location, Permissions } from 'expo';
-import { updateDescription, updateLocation, uploadPost } from '../actions/post'
+import { ImagePicker, Location, Permissions } from 'expo';
+import { NavigationEvents } from 'react-navigation';
+import { updateDescription, updateLocation, uploadPost, updatePhoto } from '../actions/post'
 import { FlatList, Modal, SafeAreaView, Text, View, TextInput, Image, TouchableOpacity } from 'react-native';
 const GOOGLE_API = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json'
+import { uploadPhoto } from '../actions'
 
 class Post extends React.Component {
   state = {
@@ -17,6 +19,23 @@ class Post extends React.Component {
   post = () => {
     this.props.uploadPost()
     this.props.navigation.navigate('Home')
+  }
+
+  onWillFocus = () => {
+    if(!this.props.post.photo){
+      this.openLibrary()
+    }
+  }
+
+  openLibrary = async () => {
+    const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL)
+    if (status === 'granted') {
+      const image = await ImagePicker.launchImageLibraryAsync()
+      if(!image.cancelled){
+        const url = await this.props.uploadPhoto(image)
+        this.props.updatePhoto(url)
+      }
+    }
   }
 
   setLocation = (location) => {
@@ -46,6 +65,7 @@ class Post extends React.Component {
   render() {
     return (
       <View style={styles.container}>
+        <NavigationEvents onWillFocus={this.onWillFocus}/>
         <Modal animationType='slide' transparent={false} visible={this.state.showModal}>
           <SafeAreaView style={[styles.container, styles.center]}>
             <FlatList
@@ -78,7 +98,7 @@ class Post extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ updateDescription, uploadPost, updateLocation }, dispatch)
+  return bindActionCreators({ updateDescription, uploadPost, updateLocation, uploadPhoto, updatePhoto }, dispatch)
 }
 
 const mapStateToProps = (state) => {

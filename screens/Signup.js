@@ -9,11 +9,6 @@ import { uploadPhoto } from '../actions'
 
 class Signup extends React.Component {
 
-  componentDidMount = () => {
-    const { routeName } = this.props.navigation.state
-    console.log(routeName)
-  }
-
   onPress = () => {
     const { routeName } = this.props.navigation.state
     if(routeName === 'Signup'){
@@ -32,7 +27,6 @@ class Signup extends React.Component {
       if(!image.cancelled ){
         const url = await this.props.uploadPhoto(image)
         this.props.updatePhoto(url)
-        console.log(url)
       }
     }
   }
