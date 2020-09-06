@@ -16,6 +16,10 @@ class Post extends React.Component {
     locations: []
   }
 
+  componentDidMount(){
+    this.getLocations()
+  }
+
   post = () => {
     this.props.uploadPost()
     this.props.navigation.navigate('Home')
@@ -51,7 +55,6 @@ class Post extends React.Component {
   }
 
   getLocations = async () => {
-    this.setState({ showModal: true })
     const permission = await Permissions.askAsync(Permissions.LOCATION)
     if (permission.status === 'granted') {
       const location = await Location.getCurrentPositionAsync()
@@ -86,9 +89,12 @@ class Post extends React.Component {
         	onChangeText={text => this.props.updateDescription(text)}
         	placeholder='Description'
         />
-        <TouchableOpacity style={styles.border} onPress={this.getLocations}>
-          <Text style={styles.gray}>{this.props.post.location ? this.props.post.location.name : 'Add a Location'}</Text>
-        </TouchableOpacity>
+        {
+          this.state.locations.length > 0 ?        
+          <TouchableOpacity style={styles.border} onPress={() => this.setState({ showModal: true })}>
+            <Text style={styles.gray}>{this.props.post.location ? this.props.post.location.name : 'Add a Location'}</Text>
+          </TouchableOpacity> : null
+        }
       	<TouchableOpacity style={styles.button} onPress={this.post}>
       		<Text>Post</Text>
       	</TouchableOpacity>

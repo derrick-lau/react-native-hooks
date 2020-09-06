@@ -23,16 +23,16 @@ export const uploadPost = () => {
 			const upload = {
 				id: id,
 				postPhoto: post.photo,
-				postDescription: post.description,
-				postLocation: post.location,
+				postDescription: post.description || ' ',
+				postLocation: post.location || ' ',
 				uid: user.uid,
-				photo: user.photo,
+				photo: user.photo || ' ',
 				username: user.username,
 				likes: []
 			}
 			db.collection('posts').doc(id).set(upload)
 		} catch (e) {
-			alert(e)
+			console.error(e)
 		}
 	}
 }
