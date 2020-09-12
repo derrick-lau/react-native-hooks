@@ -15,14 +15,15 @@ export default styles = StyleSheet.create({
   row: {
     flexDirection: 'row'
   },
-  button: {
-    marginTop: 20,
-    paddingVertical: 10,
-    alignItems: 'center',
+  input: {
+    width: width*.90,
+    margin: 15,
+    padding: 15,
+    alignSelf: 'center',
     borderColor: '#d3d3d3',
     borderWidth: 1,
-    borderRadius: 5,
-    width: 200
+    borderRadius: 50,
+    fontSize: 16,
   },
   facebookButton: {
     backgroundColor: '#3b5998',

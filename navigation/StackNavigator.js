@@ -9,6 +9,7 @@ import ProfileScreen from '../screens/Profile'
 import CameraScreen from '../screens/Camera'
 import MapScreen from '../screens/Map'
 import EditScreen from '../screens/Signup'
+import CommentScreen from '../screens/Comment'
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 import { TouchableOpacity, Image } from 'react-native'
 
@@ -28,6 +29,17 @@ export const HomeNavigator = createAppContainer(createStackNavigator(
             <Ionicons style={{marginRight: 10}} name={'ios-send'} size={30}/>
           </TouchableOpacity>
         ),
+      })
+    },
+    Comment: {
+      screen: CommentScreen,
+      navigationOptions: ({ navigation }) => ({
+        title: 'Comments',
+        headerLeft: (
+          <TouchableOpacity onPress={() => navigation.goBack()} >
+            <Ionicons style={styles.icon} name={'ios-arrow-back'} size={30}/>
+          </TouchableOpacity>
+        )
       })
     },
     Map: {
