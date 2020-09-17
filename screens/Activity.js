@@ -26,20 +26,20 @@ class Activity extends React.Component {
   render() {
   	if (this.state.activity.length <= 0 ) return <ActivityIndicator style={styles.container}/>
     return (
-    	<View style={{flex: 1}}>
+    	<View style={styles.container}>
 				<FlatList
 				  data={this.state.activity}
 				  keyExtractor={(item) => JSON.stringify(item.date)}
 				  renderItem={({ item }) => (
-	        <View style={[styles.row, styles.center]}>
+	        <View style={[styles.row, styles.space]}>
 	        	<Image style={styles.roundImage} source={{uri: item.likerPhoto}}/>
-            <View>
+            <View style={[styles.container, styles.left]}>
               <Text>{item.likerName}</Text>
               <Text>Liked Your Photo</Text>
               <Text>{item.date}</Text>
             </View>
-	          <Image style={styles.roundImage} source={{uri: item.postPhoto}}/>
-	        </View>
+            <Image style={styles.roundImage} source={{uri: item.postPhoto}}/>
+          </View>
 				)}/>
 			</View>
     )

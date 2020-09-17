@@ -70,6 +70,9 @@ HomeNavigator.navigationOptions = ({ navigation }) => {
   if (navigation.state.routes.some(route => route.routeName === 'Map')) {
     tabBarVisible = false
   }
+  if (navigation.state.routes.some(route => route.routeName === 'Comment')) {
+    tabBarVisible = false
+  }
   return {
     tabBarVisible,
   }

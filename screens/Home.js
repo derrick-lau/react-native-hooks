@@ -38,7 +38,7 @@ class Home extends React.Component {
             const liked = item.likes.includes(this.props.user.uid)
             return (
               <View>
-                <View style={[styles.row, styles.center]}>
+                <View style={[styles.row, styles.space]}>
                   <View style={[styles.row, styles.center]}>
                     <Image style={styles.roundImage} source={{uri: item.photo}}/>
                     <View>

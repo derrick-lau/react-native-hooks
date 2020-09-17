@@ -29,6 +29,8 @@ const post = (state = null, action) => {
       return { ...state, location: action.payload }
     case 'GET_POSTS':
       return { ...state, feed: action.payload }
+    case 'GET_COMMENTS': 
+      return { ...state, comments: action.payload }
     default:
       return state
   }

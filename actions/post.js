@@ -2,6 +2,7 @@ import firebase from 'firebase'
 import db from '../config/firebase'
 import uuid from 'uuid'
 import cloneDeep from 'lodash/cloneDeep'
+import orderBy from 'lodash/orderBy'
 
 export const updateDescription = (input) => {
 	return {type: 'UPDATE_DESCRIPTION', payload: input}
@@ -103,9 +104,16 @@ export const unlikePost = (post) => {
   }
 }
 
-export const addComment = (text, postId) => {
+export const getComments = (post) => {
+  return dispatch => {
+    dispatch({ type: 'GET_COMMENTS', payload: orderBy(post.comments, 'date','desc') })
+  }
+}
+
+export const addComment = (text, post) => {
   return (dispatch, getState) => {
     const { uid, photo, username } = getState().user
+    let comments = cloneDeep(getState().post.comments.reverse())
     try {
       const comment = {
         comment: text,
@@ -115,9 +123,17 @@ export const addComment = (text, postId) => {
         date: new Date().getTime(),
       }
       console.log(comment)
-      db.collection('posts').doc(postId).update({
+      db.collection('posts').doc(post.id).update({
         comments: firebase.firestore.FieldValue.arrayUnion(comment)
       })
+      comment.postId = post.id
+      comment.postPhoto = post.postPhoto
+      comment.uid = post.uid
+      comment.type = 'COMMENT'
+      comments.push(comment)
+      dispatch({ type: 'GET_COMMENTS', payload: comments.reverse() })
+
+      db.collection('activity').doc().set(comment)
     } catch(e) {
       console.error(e)
     }

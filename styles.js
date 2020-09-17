@@ -4,13 +4,24 @@ const  { width } = Dimensions.get('window');
 export default styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: '#fff'
+  },
+  row: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
   },
   center: {
     alignItems: 'center',
+    justifyContent: 'center',
+  },
+  space: {
     justifyContent: 'space-between',
+  },
+  left: {
+    alignItems: 'flex-start',
+  },
+  right: {
+    alignItems: 'flex-end',
   },
   row: {
     flexDirection: 'row'
@@ -52,7 +63,7 @@ export default styles = StyleSheet.create({
     width: 40, 
     height: 40,
     borderRadius: 20,
-    margin: 5,
+    margin: 10,
     backgroundColor: '#adadad'
   },
   cameraButton: {
