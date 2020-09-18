@@ -1,10 +1,11 @@
 import React from 'react';
+import styles from '../styles'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import { Ionicons } from '@expo/vector-icons';
 import { Text, View, Button, Image, FlatList, TouchableOpacity } from 'react-native';
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
 import { getPosts, likePost, unlikePost } from '../actions/post'
-import styles from '../styles'
+import moment from 'moment'
 
 class Home extends React.Component {
 
@@ -32,6 +33,8 @@ class Home extends React.Component {
     return (
       <View style={styles.container}>
         <FlatList
+          onRefresh={() => this.props.getPosts()}
+          refreshing={false}
           data={this.props.post.feed}
           keyExtractor={(item) => item.id}
           renderItem={({item}) => {
@@ -42,7 +45,8 @@ class Home extends React.Component {
                   <View style={[styles.row, styles.center]}>
                     <Image style={styles.roundImage} source={{uri: item.photo}}/>
                     <View>
-                      <Text>{item.username}</Text>
+                      <Text style={styles.bold}>{item.username}</Text>
+                      <Text style={[styles.gray, styles.small]}>{moment(item.date).format('ll')}</Text>
                       <TouchableOpacity onPress={() => this.navigateMap(item)} >
                         <Text>{item.postLocation ? item.postLocation.name : null}</Text>
                       </TouchableOpacity>

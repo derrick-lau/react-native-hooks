@@ -3,7 +3,7 @@ import styles from '../styles'
 import firebase from 'firebase'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { Text, View, TextInput, TouchableOpacity } from 'react-native';
+import { Text, View, TextInput, TouchableOpacity, Image } from 'react-native';
 import { updateEmail, updatePassword, login, getUser, facebookLogin} from '../actions/user'
 
 class Login extends React.Component {
@@ -22,6 +22,7 @@ class Login extends React.Component {
   render() {
     return (
       <View style={[styles.container, styles.center]}>
+        <Image style={{width: 300, height: 100}} source={require('../assets/logo.jpg')} />
         <TextInput
         	style={styles.border}
         	value={this.props.user.email}
@@ -39,9 +40,9 @@ class Login extends React.Component {
       		<Text>Login</Text>
       	</TouchableOpacity>
         <TouchableOpacity style={styles.facebookButton} onPress={() => this.props.facebookLogin()}>
-          <Text>Facebook Login</Text>
+          <Text style={styles.white}>Facebook Login</Text>
         </TouchableOpacity>
-      	<Text>OR</Text>
+      	<Text style={{margin: 20}}>OR</Text>
       	<TouchableOpacity onPress={() => this.props.navigation.navigate('Signup')}>
       		<Text>Signup</Text>
       	</TouchableOpacity>

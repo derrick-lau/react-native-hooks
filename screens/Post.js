@@ -67,7 +67,7 @@ class Post extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <View style={[styles.container, styles.center]}>
         <NavigationEvents onWillFocus={this.onWillFocus}/>
         <Modal animationType='slide' transparent={false} visible={this.state.showModal}>
           <SafeAreaView style={[styles.container, styles.center]}>

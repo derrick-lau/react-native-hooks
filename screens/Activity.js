@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { Text, View, FlatList, ActivityIndicator, Image} from 'react-native';
 import db from '../config/firebase';
 import orderBy from 'lodash/orderBy'
+import moment from 'moment'
 
 class Activity extends React.Component {
 	state = {
@@ -20,7 +21,37 @@ class Activity extends React.Component {
     query.forEach((response) => {
       activity.push(response.data())
     })
-		this.setState({activity: activity})
+		this.setState({activity: orderBy(activity, 'date','desc')})
+  }
+
+  renderList = (item) => {
+    switch(item.type) {
+      case 'LIKE':
+        return (         
+          <View style={[styles.row, styles.space]}>
+            <Image style={styles.roundImage} source={{uri: item.likerPhoto}}/>
+            <View style={[styles.container, styles.left]}>
+              <Text style={styles.bold}>{item.likerName}</Text>
+              <Text style={styles.gray}>Liked Your Photo</Text>
+              <Text style={[styles.gray, styles.small]}>{moment(item.date).format('ll')}</Text>
+            </View>
+            <Image style={styles.roundImage} source={{uri: item.postPhoto}}/>
+          </View>
+        )
+      case 'COMMENT':
+        return (         
+          <View style={[styles.row, styles.space]}>
+            <Image style={styles.roundImage} source={{uri: item.commenterPhoto}}/>
+            <View style={[styles.container, styles.left]}>
+              <Text style={styles.bold}>{item.commenterName}</Text>
+              <Text style={styles.gray}>{item.comment}</Text>
+              <Text style={[styles.gray, styles.small]}>{moment(item.date).format('ll')}</Text>
+            </View>
+            <Image style={styles.roundImage} source={{uri: item.postPhoto}}/>
+          </View>
+        )
+      default: null
+    }
   }
 
   render() {
@@ -28,19 +59,11 @@ class Activity extends React.Component {
     return (
     	<View style={styles.container}>
 				<FlatList
+          onRefresh={() => this.getActivity()}
+          refreshing={false}
 				  data={this.state.activity}
 				  keyExtractor={(item) => JSON.stringify(item.date)}
-				  renderItem={({ item }) => (
-	        <View style={[styles.row, styles.space]}>
-	        	<Image style={styles.roundImage} source={{uri: item.likerPhoto}}/>
-            <View style={[styles.container, styles.left]}>
-              <Text>{item.likerName}</Text>
-              <Text>Liked Your Photo</Text>
-              <Text>{item.date}</Text>
-            </View>
-            <Image style={styles.roundImage} source={{uri: item.postPhoto}}/>
-          </View>
-				)}/>
+				  renderItem={({ item }) => this.renderList(item)} />
 			</View>
     )
   }

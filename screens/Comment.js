@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Text, View, TextInput, FlatList, Image, KeyboardAvoidingView } from 'react-native';
 import { addComment, getComments } from '../actions/post';
+import moment from 'moment'
 
 class Comment extends React.Component {
   state = {
@@ -31,8 +32,9 @@ class Comment extends React.Component {
             <View style={[styles.row, styles.space]}>
               <Image style={styles.roundImage} source={{uri: item.commenterPhoto}}/>
               <View style={[styles.container, styles.left]}>
-                <Text>{item.commenterName}</Text>
-                <Text>{item.comment}</Text>
+                <Text style={styles.bold}>{item.commenterName}</Text>
+                <Text style={styles.gray}>{item.comment}</Text>
+                <Text style={[styles.gray, styles.small]}>{moment(item.date).format('ll')}</Text>
               </View>
             </View>
           )}/>

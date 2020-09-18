@@ -6,15 +6,12 @@ export default styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff'
   },
-  row: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-  },
   center: {
     alignItems: 'center',
     justifyContent: 'center',
   },
   space: {
+    alignItems: 'center',
     justifyContent: 'space-between',
   },
   left: {
@@ -25,6 +22,18 @@ export default styles = StyleSheet.create({
   },
   row: {
     flexDirection: 'row'
+  },
+  bold: {
+    fontWeight: 'bold',
+  },
+  white: {
+    color: '#fff',
+  },
+  gray: {
+    color: '#adadad',
+  },
+  small: {
+    fontSize: 10,
   },
   input: {
     width: width*.90,
