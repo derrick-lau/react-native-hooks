@@ -83,7 +83,7 @@ export const SearchNavigator = createAppContainer(createStackNavigator(
     Search: { 
       screen: SearchScreen,
       navigationOptions: {
-        title: 'Search'
+        header: null
       }
     }
   }
